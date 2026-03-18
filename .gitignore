@@ -1,4 +1,4 @@
-elivate-website/.env
-elivate-website/.env.example
+.env
+env.example
 node_modules/  
 dist/
