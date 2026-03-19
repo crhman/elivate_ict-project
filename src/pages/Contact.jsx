@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { useState } from 'react'
-import heroVisual from '../assets/hero-visual.svg'
+import heroVisual from '../assets/contact-support.png'
 
 const Contact = () => {
   const fieldClass =

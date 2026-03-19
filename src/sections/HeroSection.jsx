@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import heroVisual from '../assets/hero-visual.svg'
+import heroVisual from '../assets/hero-tech.png'
 import { NavLink } from 'react-router-dom'
 
 const HeroSection = () => {

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Award, ShieldCheck, Sparkles, Target, Users } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading.jsx'
 import { teamMembers } from '../data/team.js'
-import heroVisual from '../assets/hero-visual.svg'
+import heroVisual from '../assets/about-office.png'
 import projectFour from '../assets/project-4.svg'
 
 const About = () => {
