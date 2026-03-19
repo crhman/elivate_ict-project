@@ -6,8 +6,6 @@ import Services from './pages/Services.jsx'
 import Portfolio from './pages/Portfolio.jsx'
 import PortfolioDetail from './pages/PortfolioDetail.jsx'
 import Industries from './pages/Industries.jsx'
-import Blog from './pages/Blog.jsx'
-import AdminBlog from './pages/AdminBlog.jsx'
 import Careers from './pages/Careers.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
@@ -22,8 +20,6 @@ const App = () => {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/portfolio/:slug" element={<PortfolioDetail />} />
         <Route path="/industries" element={<Industries />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/admin/blog" element={<AdminBlog />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />

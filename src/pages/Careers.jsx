@@ -1,8 +1,8 @@
-import { jobOpenings } from '../data/jobs.js'
 import { NavLink } from 'react-router-dom'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Briefcase, HeartPulse, Laptop, Lightbulb, Clock4, Upload } from 'lucide-react'
 import heroVisual from '../assets/hero-visual.svg'
+import { jobOpenings as fallbackJobs } from '../data/jobs.js'
 
 const benefits = [
   {
@@ -31,16 +31,32 @@ const Careers = () => {
   const [activeTeam, setActiveTeam] = useState('All Jobs')
   const [desiredRole, setDesiredRole] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [jobs, setJobs] = useState(fallbackJobs)
 
   const fieldClass =
     'rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100 dark:placeholder:text-slate-400'
 
+  useEffect(() => {
+    const loadJobs = async () => {
+      try {
+        const response = await fetch('/api/jobs')
+        const data = await response.json()
+        if (response.ok && Array.isArray(data) && data.length) {
+          setJobs(data)
+        }
+      } catch (error) {
+        // Keep fallback jobs on error
+      }
+    }
+    loadJobs()
+  }, [])
+
   const filteredJobs = useMemo(() => {
     if (activeTeam === 'All Jobs') {
-      return jobOpenings
+      return jobs
     }
-    return jobOpenings.filter((job) => job.team === activeTeam)
-  }, [activeTeam])
+    return jobs.filter((job) => job.team === activeTeam)
+  }, [activeTeam, jobs])
 
   const handleApply = (jobTitle) => {
     setDesiredRole(jobTitle)

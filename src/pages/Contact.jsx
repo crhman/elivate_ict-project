@@ -78,14 +78,14 @@ const Contact = () => {
             },
             {
               title: 'Visit Us',
-              description: 'Main Office Plaza, Suite 402',
+              description: 'Main Office Taleex, ',
               value: 'Mogadishu, Somalia',
               icon: MapPin,
             },
             {
               title: 'Call Us',
               description: 'Mon-Fri from 8am to 5pm',
-              value: '+252 61 000 0000',
+              value: '+252 614779930',
               icon: Phone,
             },
           ].map((item) => {

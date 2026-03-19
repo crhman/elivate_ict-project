@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Award, ShieldCheck, Sparkles, Target, Users } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading.jsx'
 import { teamMembers } from '../data/team.js'
@@ -6,6 +7,38 @@ import heroVisual from '../assets/hero-visual.svg'
 import projectFour from '../assets/project-4.svg'
 
 const About = () => {
+  const fallbackAbout = {
+    headline: 'Empowering Businesses Through Innovation',
+    story:
+      'Founded with a vision to bridge the digital gap, Elivate ICT Solutions provides cutting-edge software and infrastructure services to businesses worldwide. We believe in technology as a catalyst for sustainable growth.',
+    mission:
+      'To accelerate digital transformation by providing robust, scalable, and innovative ICT solutions that empower organizations to achieve their highest potential.',
+    vision:
+      'To be the most trusted ICT innovation partner in the Horn of Africa, recognized for our commitment to excellence and integrity.',
+  }
+
+  const [about, setAbout] = useState(fallbackAbout)
+
+  useEffect(() => {
+    const loadAbout = async () => {
+      try {
+        const response = await fetch('/api/about')
+        const data = await response.json()
+        if (response.ok && data?.headline) {
+          setAbout({
+            headline: data.headline || fallbackAbout.headline,
+            story: data.story || fallbackAbout.story,
+            mission: data.mission || fallbackAbout.mission,
+            vision: data.vision || fallbackAbout.vision,
+          })
+        }
+      } catch (error) {
+        // Keep fallback on error
+      }
+    }
+    loadAbout()
+  }, [])
+
   return (
     <div>
       <section className="bg-slate-50 pb-12 pt-16">
@@ -13,13 +46,17 @@ const About = () => {
           <div className="space-y-6">
             <span className="section-label">Our Journey</span>
             <h1 className="font-display text-4xl font-semibold text-ink sm:text-5xl">
-              Empowering Businesses Through{' '}
-              <span className="text-primary">Innovation</span>
+              {about.headline.includes('Innovation') ? (
+                <>
+                  {about.headline.split('Innovation')[0]}
+                  <span className="text-primary">Innovation</span>
+                </>
+              ) : (
+                about.headline
+              )}
             </h1>
             <p className="text-base text-slate-600">
-              Founded with a vision to bridge the digital gap, Elivate ICT Solutions
-              provides cutting-edge software and infrastructure services to businesses
-              worldwide. We believe in technology as a catalyst for sustainable growth.
+              {about.story}
             </p>
           </div>
           <div className="relative">
@@ -64,13 +101,13 @@ const About = () => {
             {
               title: 'Our Mission',
               description:
-                'To accelerate digital transformation by providing robust, scalable, and innovative ICT solutions that empower organizations to achieve their highest potential.',
+                about.mission,
               icon: Target,
             },
             {
               title: 'Our Vision',
               description:
-                'To be the most trusted ICT innovation partner in the Horn of Africa, recognized for our commitment to excellence and integrity.',
+                about.vision,
               icon: Award,
             },
           ].map((item) => {

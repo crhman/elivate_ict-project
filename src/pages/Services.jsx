@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom'
 import { CheckCircle2 } from 'lucide-react'
 import { services } from '../data/services.js'
-import projectOne from '../assets/project-1.svg'
-import projectThree from '../assets/project-3.svg'
+import webDevelopmentImage from '../assets/web-development.jpg'
+import mobileDevelopmentImage from '../assets/mobile-development.jpg'
 
 const Services = () => {
   const highlightServices = services.slice(0, 2)
   const secondaryServices = services.slice(2)
-  const highlightImages = [projectOne, projectThree]
+  const highlightImages = [webDevelopmentImage, mobileDevelopmentImage]
 
   return (
     <div>

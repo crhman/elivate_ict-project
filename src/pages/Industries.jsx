@@ -1,15 +1,24 @@
 import { NavLink } from 'react-router-dom'
 import { industries } from '../data/industries.js'
 import heroVisual from '../assets/hero-visual.svg'
-import projectOne from '../assets/project-1.svg'
-import projectTwo from '../assets/project-2.svg'
-import projectThree from '../assets/project-3.svg'
-import projectFour from '../assets/project-4.svg'
+import financeImage from '../assets/finance.jpg'
+import educationImage from '../assets/education.jpg'
+import healthcareImage from '../assets/healthcare.jpg'
+import retailEcommerceImage from '../assets/retail and ecommerce.jpg'
+import governmentNgoImage from '../assets/govermenr and NGOS.jpg'
+import realEstateImage from '../assets/realstate.jpg'
 
 const Industries = () => {
   const industryCards = industries.map((industry, index) => ({
     ...industry,
-    image: [projectOne, projectTwo, projectThree, projectFour, projectTwo, projectOne][index],
+    image: [
+      financeImage,
+      educationImage,
+      healthcareImage,
+      retailEcommerceImage,
+      governmentNgoImage,
+      realEstateImage,
+    ][index],
     description:
       index === 0
         ? 'Secure digital banking platforms and fintech solutions designed to modernize legacy systems.'

@@ -17,4 +17,22 @@ export const testimonials = [
     quote:
       'Our new digital storefront elevated our brand and boosted sales across every channel. The UI/UX work is world-class.',
   },
+  {
+    name: 'abdirahman bahal',
+    role: 'Marketing Lead, Noor Retail',
+    quote:
+      'Our new digital storefront elevated our brand and boosted sales across every channel. The UI/UX work is world-class.',
+  },
+  {
+    name: 'Engr hakimi',
+    role: 'Marketing Lead, Noor Retail',
+    quote:
+      'Our new digital storefront elevated our brand and boosted sales across every channel. The UI/UX work is world-class.',
+  },
+  {
+    name: 'Engr Mohamed',
+    role: 'Marketing Lead, Noor Retail',
+    quote:
+      'Our new digital storefront elevated our brand and boosted sales across every channel. The UI/UX work is world-class.',
+  },
 ]

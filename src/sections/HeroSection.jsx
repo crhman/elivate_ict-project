@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 const HeroSection = () => {
   return (
     <section className="bg-hero-gradient pb-20 pt-16">
-      <div className="container-max grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="container-max grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,11 +38,11 @@ const HeroSection = () => {
           className="relative"
         >
           <div className="absolute -left-6 -top-6 h-40 w-40 rounded-full bg-secondary blur-2xl" />
-          <div className="relative rounded-3xl bg-white/70 p-4 shadow-soft backdrop-blur">
+          <div className="relative rounded-[36px] bg-white/80 p-5 shadow-soft backdrop-blur lg:p-6">
             <img
               src={heroVisual}
-              alt="Abstract technology sphere"
-              className="w-full rounded-2xl"
+              alt="Elivate ICT team at work"
+              className="h-[260px] w-full rounded-[28px] object-cover sm:h-[320px] lg:h-[380px]"
             />
           </div>
         </motion.div>
