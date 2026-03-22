@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { useEffect, useMemo, useState } from 'react'
 import { Briefcase, HeartPulse, Laptop, Lightbulb, Clock4, Upload } from 'lucide-react'
-import heroVisual from '../assets/hero-visual.svg'
+import heroVisual from '../assets/careers-team.png'
 import { jobOpenings as fallbackJobs } from '../data/jobs.js'
 
 const benefits = [
@@ -32,9 +32,45 @@ const Careers = () => {
   const [desiredRole, setDesiredRole] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [jobs, setJobs] = useState(fallbackJobs)
+  const [status, setStatus] = useState({ state: 'idle', message: '' })
 
   const fieldClass =
     'rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100 dark:placeholder:text-slate-400'
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setStatus({ state: 'loading', message: '' })
+
+    const formData = new FormData(event.target)
+    const payload = Object.fromEntries(formData)
+    payload.access_key = '71e46b0e-9226-430b-8a12-96d7356ef3ae'
+    payload.subject = `New Job Application for ${desiredRole || 'a role'}`
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+
+      const data = await response.json()
+      if (!data.success) {
+        throw new Error(data.message || 'Unknown server error')
+      }
+
+      setStatus({ state: 'success', message: 'Application submitted! Our HR team will review it.' })
+      setTimeout(() => {
+        setIsModalOpen(false)
+        setStatus({ state: 'idle', message: '' })
+        setDesiredRole('')
+      }, 2500)
+    } catch (error) {
+      setStatus({ state: 'error', message: `Error: ${error.message}` })
+    }
+  }
 
   useEffect(() => {
     const loadJobs = async () => {
@@ -139,11 +175,10 @@ const Careers = () => {
                   key={label}
                   type="button"
                   onClick={() => setActiveTeam(label)}
-                  className={`rounded-full px-4 py-2 text-xs font-semibold ${
-                    activeTeam === label
+                  className={`rounded-full px-4 py-2 text-xs font-semibold ${activeTeam === label
                       ? 'bg-primary text-white'
                       : 'border border-slate-200 text-slate-600'
-                  }`}
+                    }`}
                 >
                   {label}
                 </button>
@@ -218,41 +253,62 @@ const Careers = () => {
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
               Complete the form below and we will reach out within two business days.
             </p>
-            <form className="mt-6 grid gap-4 md:grid-cols-2">
+            <form className="mt-6 grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
               <input
                 type="text"
+                name="name"
                 placeholder="Full name"
                 className={fieldClass}
+                required
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Email address"
                 className={fieldClass}
+                required
               />
               <input
                 type="text"
+                name="role"
                 placeholder="Desired role"
                 className={fieldClass}
                 value={desiredRole}
                 onChange={(event) => setDesiredRole(event.target.value)}
+                required
               />
               <input
                 type="text"
+                name="linkedin"
                 placeholder="LinkedIn profile (optional)"
                 className={fieldClass}
               />
               <textarea
+                name="message"
                 placeholder="Tell us about yourself"
                 className={`md:col-span-2 ${fieldClass}`}
                 rows="4"
+                required
               />
-              <div className="md:col-span-2 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-400">
-                <Upload className="mx-auto mb-2 text-slate-400 dark:text-slate-300" size={20} />
-                Click to upload or drag and drop PDF, DOC up to 10MB.
-              </div>
-              <button type="button" className="btn-primary md:col-span-2">
-                Submit Application
+              <input
+                type="url"
+                name="resume"
+                placeholder="Link to Portfolio or Resume (Google Drive, LinkedIn)"
+                className={`md:col-span-2 ${fieldClass}`}
+                required
+              />
+              <button
+                type="submit"
+                className="btn-primary md:col-span-2"
+                disabled={status.state === 'loading' || status.state === 'success'}
+              >
+                {status.state === 'loading' ? 'Submitting...' : 'Submit Application'}
               </button>
+              {status.message && (
+                <p className={`md:col-span-2 text-sm text-center font-medium ${status.state === 'error' ? 'text-red-500' : 'text-emerald-500'}`}>
+                  {status.message}
+                </p>
+              )}
             </form>
           </div>
         </div>

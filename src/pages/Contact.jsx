@@ -24,16 +24,21 @@ const Contact = () => {
     event.preventDefault()
     setStatus({ state: 'loading', message: '' })
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: '71e46b0e-9226-430b-8a12-96d7356ef3ae', // <-- Replace with your Web3Forms access key
+          ...formData
+        })
       })
-      const text = await response.text()
-      const data = text ? JSON.parse(text) : {}
-      if (!response.ok) {
-        throw new Error(data?.message || 'Failed to send message.')
-      }
+
+      const data = await response.json()
+      if (!data.success) throw new Error()
+
       setStatus({ state: 'success', message: 'Message sent! Our team will reach out soon.' })
       setFormData({
         name: '',
@@ -45,7 +50,7 @@ const Contact = () => {
     } catch (error) {
       setStatus({
         state: 'error',
-        message: error?.message || 'Something went wrong. Please try again.',
+        message: 'Something went wrong. Please try again.',
       })
     }
   }
@@ -169,9 +174,8 @@ const Contact = () => {
               </button>
               {status.message && (
                 <p
-                  className={`md:col-span-2 text-sm ${
-                    status.state === 'error' ? 'text-red-500' : 'text-emerald-500'
-                  }`}
+                  className={`md:col-span-2 text-sm ${status.state === 'error' ? 'text-red-500' : 'text-emerald-500'
+                    }`}
                   aria-live="polite"
                 >
                   {status.message}
