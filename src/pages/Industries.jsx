@@ -52,7 +52,7 @@ const Industries = () => {
         <div className="container-max">
           <div className="relative overflow-hidden rounded-3xl bg-slate-950 text-white shadow-soft">
             <img
-              src={heroVisual}
+              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop"
               alt="Industries we transform"
               className="h-64 w-full object-cover opacity-60 sm:h-72"
             />

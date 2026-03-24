@@ -1,7 +1,7 @@
-import projectOne from '../assets/project-1.svg'
-import projectTwo from '../assets/project-2.svg'
-import projectThree from '../assets/project-3.svg'
-import projectFour from '../assets/project-4.svg'
+import financeImage from '../assets/finance.jpg'
+import supplyChainImage from '../assets/supply-chain-ai.png'
+import healthcareImage from '../assets/healthcare.jpg'
+import retailImage from '../assets/retail and ecommerce.jpg'
 
 export const projects = [
   {
@@ -11,7 +11,7 @@ export const projects = [
     category: 'Dashboards',
     tag: 'Analytics',
     technologies: ['React', 'Node.js', 'PostgreSQL'],
-    image: projectOne,
+    image: financeImage,
     results: 'Reduced onboarding time by 42% and improved digital adoption by 35%.',
   },
   {
@@ -21,7 +21,7 @@ export const projects = [
     category: 'E-commerce',
     tag: 'E-commerce',
     technologies: ['Python', 'TensorFlow', 'Power BI'],
-    image: projectTwo,
+    image: supplyChainImage,
     results: 'Increased forecast accuracy to 92% and saved 18% in logistics costs.',
   },
   {
@@ -31,7 +31,7 @@ export const projects = [
     category: 'Mobile Apps',
     tag: 'Mobile App',
     technologies: ['React Native', 'Firebase', 'Twilio'],
-    image: projectThree,
+    image: healthcareImage,
     results: 'Enabled 25,000+ remote visits in the first six months.',
   },
   {
@@ -41,7 +41,7 @@ export const projects = [
     category: 'Websites',
     tag: 'Portfolio',
     technologies: ['Figma', 'Shopify Plus', 'HubSpot'],
-    image: projectFour,
+    image: retailImage,
     results: 'Lifted online revenue by 58% with a premium brand redesign.',
   },
 ]

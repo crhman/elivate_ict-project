@@ -37,7 +37,15 @@ const Portfolio = () => {
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-4 border-b border-slate-200 pb-4 text-sm font-semibold">
+          <div className="relative overflow-hidden rounded-3xl shadow-soft">
+            <img
+              src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1920&auto=format&fit=crop"
+              alt="Our Digital Portfolio"
+              className="h-64 w-full object-cover sm:h-72"
+            />
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-4 border-b border-slate-200 pb-4 text-sm font-semibold">
             {categories.map((category) => (
               <button
                 key={category}
